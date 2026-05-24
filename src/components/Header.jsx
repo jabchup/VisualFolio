@@ -10,7 +10,7 @@ const Header = () => {
             setIsScrolled(window.scrollY > 50);
 
             // Update active section based on scroll position
-            const sections = ['about', 'career', 'projects'];
+            const sections = ['about', 'research', 'projects'];
             for (const section of sections) {
                 const element = document.getElementById(section);
                 if (element) {
@@ -29,7 +29,7 @@ const Header = () => {
 
     const navLinks = [
         { id: 'about', label: 'About' },
-        { id: 'career', label: 'Career' },
+        { id: 'research', label: 'Research' },
         { id: 'projects', label: 'Projects' },
     ];
 
@@ -64,10 +64,7 @@ const Header = () => {
                                 [
                             </span>
                             <span className="text-white font-semibold text-lg tracking-wide">
-                                Alexi George
-                            </span>
-                            <span className="text-gray-400 text-sm">
-                                - Portfolio
+                                Alexi&apos;s Portfolio
                             </span>
                             <span className="text-cyber-cyan text-xl font-bold tracking-wider group-hover:animate-pulse-glow">
                                 ]
@@ -106,27 +103,6 @@ const Header = () => {
                         ))}
                     </div>
 
-                    {/* Mobile menu button */}
-                    <div className="md:hidden">
-                        <button
-                            className="text-cyber-cyan p-2 border border-cyber-cyan/30 rounded hover:bg-cyber-cyan/10 transition-colors"
-                            aria-label="Menu"
-                        >
-                            <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            </svg>
-                        </button>
-                    </div>
                 </div>
             </nav>
         </header>

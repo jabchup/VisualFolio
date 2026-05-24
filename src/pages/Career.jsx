@@ -1,16 +1,14 @@
 import { useState } from 'react';
 
 const Career = () => {
-    const [activeMainTab, setActiveMainTab] = useState('experience');
     const [selectedExpId, setSelectedExpId] = useState(1);
-    const [selectedEduId, setSelectedEduId] = useState(1);
 
     const experienceData = [
         {
             id: 1,
             role: 'AI Research Engineer (Intern/Team Lead)',
             company: 'Agency for Science, Technology and Research (A*STAR)',
-            period: 'Dec 2025 – Ongoing',
+            period: 'Dec 2025 - Ongoing',
             location: 'Singapore',
             description: 'Leading a team to collaborate with researchers from A*STAR on humanoid actuator design.',
             highlights: [
@@ -38,7 +36,7 @@ const Career = () => {
             id: 3,
             role: 'Research Assistant (Multimodal Speech Processing)',
             company: 'SIT x NVIDIA AI Center',
-            period: 'Nov 2024 – Aug 2025',
+            period: 'Nov 2024 - Aug 2025',
             location: 'Singapore',
             description: 'Researching multimodal speech processing optimization and real-time decision systems.',
             highlights: [
@@ -52,7 +50,7 @@ const Career = () => {
             id: 4,
             role: 'AI Research Intern (Generative AI)',
             company: 'CYNAPSE.AI',
-            period: 'May 2024 – Oct 2024',
+            period: 'May 2024 - Oct 2024',
             location: 'Singapore',
             description: 'Worked on integrating Spatio-Temporal Models and developing production-ready inference services.',
             highlights: [
@@ -66,7 +64,7 @@ const Career = () => {
             id: 5,
             role: 'AI Software Engineer Intern (Vision AI)',
             company: 'CYNAPSE.AI',
-            period: 'Aug 2021 – June 2022',
+            period: 'Aug 2021 - June 2022',
             location: 'Singapore',
             description: 'Focus on synthetic data generation and computer vision model development.',
             highlights: [
@@ -79,7 +77,7 @@ const Career = () => {
             id: 6,
             role: 'Robotics & Automation Engineer Intern',
             company: 'Univac Precision Engineering Pte Ltd',
-            period: 'Mar 2021 – Aug 2021',
+            period: 'Mar 2021 - Aug 2021',
             location: 'Singapore',
             description: 'Spearheaded IoT development and autonomous robot deployment.',
             highlights: [
@@ -90,39 +88,9 @@ const Career = () => {
         },
     ];
 
-    const educationData = [
-        {
-            id: 1,
-            degree: 'BSc in Applied Artificial Intelligence (Hons)',
-            institution: 'Singapore Institute of Technology',
-            period: 'Aug 2024 – Ongoing',
-            location: '13 Punggol Rd, Singapore',
-            description: 'Specializing in Applied Artificial Intelligence.',
-            highlights: [
-                'Focus areas: Deep Learning, Computer Vision, AI Systems',
-                'Active in AIRBORNE Lab as EXCO/Lead Student Engineer',
-            ],
-            technologies: ['Artificial Intelligence', 'Machine Learning', 'Data Science'],
-        },
-        {
-            id: 2,
-            degree: 'Diploma in Electrical and Electronic Engineering (Robotics and Control)',
-            institution: 'Singapore Polytechnic',
-            period: 'Apr 2019 – Apr 2021',
-            location: '500 Dover Rd, Singapore',
-            description: 'Foundation in electrical engineering and electronics systems. Specialization in Robotics and Control.',
-            highlights: [
-                'Specialized in Robotics and Control',
-                'Gained strong fundamentals in hardware and embedded systems',
-                'Developed practical engineering skills',
-            ],
-            technologies: ['Electronics', 'Embedded Systems', 'Robotics', 'Control Systems'],
-        },
-    ];
-
-    const currentData = activeMainTab === 'experience' ? experienceData : educationData;
-    const selectedId = activeMainTab === 'experience' ? selectedExpId : selectedEduId;
-    const setSelectedId = activeMainTab === 'experience' ? setSelectedExpId : setSelectedEduId;
+    const currentData = experienceData;
+    const selectedId = selectedExpId;
+    const setSelectedId = setSelectedExpId;
     const selectedItem = currentData.find(item => item.id === selectedId) || currentData[0];
 
     return (
@@ -134,44 +102,11 @@ const Career = () => {
                     <span className="text-gray-500">/&gt;</span>
                 </h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
-                    <span className="text-cyber-cyan">//</span> My professional journey and educational background
+                    <span className="text-cyber-cyan">//</span> My professional journey
                 </p>
             </div>
 
-            {/* Main Tab Buttons - Minimal styling */}
-            <div className="flex justify-center gap-4 mb-8">
-                <button
-                    onClick={() => setActiveMainTab('experience')}
-                    className={`
-            px-6 py-2 text-sm font-medium tracking-wide uppercase
-            border rounded transition-all duration-300
-            ${activeMainTab === 'experience'
-                            ? 'bg-white/10 border-white/30 text-white'
-                            : 'border-gray-700 text-gray-500 hover:text-gray-300 hover:border-gray-500'
-                        }
-          `}
-                >
-                    Experience
-                </button>
-                <button
-                    onClick={() => setActiveMainTab('education')}
-                    className={`
-            px-6 py-2 text-sm font-medium tracking-wide uppercase
-            border rounded transition-all duration-300
-            ${activeMainTab === 'education'
-                            ? 'bg-white/10 border-white/30 text-white'
-                            : 'border-gray-700 text-gray-500 hover:text-gray-300 hover:border-gray-500'
-                        }
-          `}
-                >
-                    Education
-                </button>
-            </div>
-
-            {/* Split Layout: 30% Tabs | 70% Details */}
             <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-6">
-
-                {/* Left Panel - Vertical Tabs (30%) - Solid background for readability */}
                 <div className="bg-glass-dark backdrop-blur-md p-4 rounded-lg border border-glass-border space-y-2 max-h-[60vh] overflow-y-auto">
                     {currentData.map((item) => (
                         <button
@@ -185,19 +120,14 @@ const Career = () => {
                                 }
               `}
                         >
-                            {/* Role/Degree */}
                             <p className={`font-medium text-sm mb-1 whitespace-pre-line ${selectedId === item.id ? 'text-white' : 'text-gray-300'}`}>
-                                {activeMainTab === 'experience'
-                                    ? item.role
-                                    : item.degree.replace(' (', '\n(')}
+                                {item.role}
                             </p>
 
-                            {/* Company/Institution */}
                             <p className="text-gray-400 text-xs mb-2">
-                                {activeMainTab === 'experience' ? item.company : item.institution}
+                                {item.company}
                             </p>
 
-                            {/* Period & Location */}
                             <div className="flex items-center justify-between text-xs">
                                 <span className={selectedId === item.id ? 'text-gray-300' : 'text-gray-500'}>
                                     {item.period}
@@ -210,33 +140,27 @@ const Career = () => {
                     ))}
                 </div>
 
-                {/* Right Panel - Details (70%) - Clean solid background */}
                 <div className="bg-glass-dark backdrop-blur-md p-6 lg:p-8 rounded-lg border border-glass-border">
-                    {/* Header */}
                     <div className="mb-6">
                         <h3 className="text-xl font-semibold text-white mb-2 whitespace-pre-line">
-                            {activeMainTab === 'experience'
-                                ? selectedItem.role
-                                : selectedItem.degree.replace(' (', '\n(')}
+                            {selectedItem.role}
                         </h3>
                         <p className="text-gray-400">
-                            {activeMainTab === 'experience' ? selectedItem.company : selectedItem.institution}
+                            {selectedItem.company}
                         </p>
                         <div className="flex items-center gap-3 mt-2 text-sm">
                             <span className="text-gray-500">{selectedItem.period}</span>
-                            <span className="text-gray-700">•</span>
+                            <span className="text-gray-700">�</span>
                             <span className="text-gray-500">{selectedItem.location}</span>
                         </div>
                     </div>
 
-                    {/* Description */}
                     <div className="mb-6">
                         <p className="text-gray-400 leading-relaxed">
                             {selectedItem.description}
                         </p>
                     </div>
 
-                    {/* Highlights */}
                     <div className="mb-6">
                         <h4 className="text-xs text-gray-600 uppercase tracking-wider mb-3">
                             Key Achievements
@@ -244,14 +168,13 @@ const Career = () => {
                         <ul className="space-y-2">
                             {selectedItem.highlights.map((highlight, i) => (
                                 <li key={i} className="text-gray-400 text-sm flex items-start gap-3">
-                                    <span className="text-gray-600 mt-0.5">→</span>
+                                    <span className="text-gray-600 mt-0.5">?</span>
                                     <span>{highlight}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Technologies */}
                     <div>
                         <h4 className="text-xs text-gray-600 uppercase tracking-wider mb-3">
                             Technologies

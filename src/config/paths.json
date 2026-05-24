@@ -7,6 +7,10 @@
         "enhancement_path": {
             "enabled": true,
             "description": "Image and Audio Enhancement focused slideshow view"
+        },
+        "agent_path": {
+            "enabled": true,
+            "description": "AI Agents and Orchestration focused slideshow view"
         }
     }
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,9 +10,9 @@
   --primary-accent: #00FFFF;
   --secondary-accent: #00FF88;
   --deep-space: #000000;
-  --deep-space-light: #0a1628;
-  --glass-bg: rgba(17, 25, 40, 0.75);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --deep-space-light: #000000;
+  --glass-bg: rgba(0, 0, 0, 0.96);
+  --glass-border: rgba(255, 255, 255, 0.06);
 }
 
 * {
@@ -31,22 +33,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Scanline overlay for CRT effect */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(0deg,
-      transparent,
-      transparent 2px,
-      rgba(0, 0, 0, 0.03) 2px,
-      rgba(0, 0, 0, 0.03) 4px);
-  pointer-events: none;
-  z-index: 9999;
-}
 
 /* Typography */
 
@@ -161,22 +147,6 @@ h3 {
       transparent);
 }
 
-/* Grid noise texture overlay */
-.noise-overlay {
-  position: relative;
-}
-
-.noise-overlay::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.02;
-  pointer-events: none;
-}
 
 /* Terminal cursor blink */
 .cursor-blink::after {

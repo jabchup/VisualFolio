@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './RoboticsPath.module.css';
 import pathsConfig from '../../config/paths.json';
+import worldSimImg from './assets/robotics_path/3d_worldSim.jpg';
+import cerberusVid from './assets/robotics_path/cerberus.mp4';
+import softRobVid from './assets/robotics_path/soft_rob_testmp4.mp4';
 
 const VisionGraph = () => (
     <div className="flex flex-col items-center justify-center h-full w-full font-mono p-4 gap-8">
@@ -183,7 +186,7 @@ const RoboticsPath = () => {
                     </div>
                 </div>
             ),
-            image: "assets/robotics_path/3d_worldSim.jpg",
+            image: worldSimImg,
             mediaFlex: 2.5,
             mediaMaxHeight: '500px'
         },
@@ -208,7 +211,7 @@ const RoboticsPath = () => {
         {
             title: "Cerberus",
             description: "Quadruped robotic platform trained using Proximal Policy Optimization (PPO). Developed with PyBullet for high-fidelity physics simulation and behavior verification.",
-            video: "assets/robotics_path/cerberus.mp4",
+            video: cerberusVid,
             subItems: ["architecture", "vision", "movement"],
             subContent: [
                 {
@@ -347,7 +350,7 @@ const RoboticsPath = () => {
                     </div>
                 </div>
             ),
-            video: "assets/robotics_path/soft_rob_testmp4.mp4"
+            video: softRobVid
         }
     ];
 

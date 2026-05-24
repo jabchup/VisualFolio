@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
 import GlassSegment from '../components/GlassSegment';
@@ -13,36 +13,40 @@ import bogo1 from '../assets/BogoBeauty/1.png';
 import bogo2 from '../assets/BogoBeauty/2.png';
 import bogo3 from '../assets/BogoBeauty/3.png';
 import bogo4 from '../assets/BogoBeauty/4.png';
+import dismantleTransformerThumb from '../assets/thumbnails/dismantle-transformer.png';
+import evolutionaryFusionThumb from '../assets/thumbnails/evolutionary-model-fusion.png';
+import eagleThumb from '../assets/thumbnails/Eagle.png';
+import landSharkPreviewVideo from '../assets/thumbnails/LandShark.mp4';
 
 const bogoBeautySlides = [bogo1, bogo2, bogo3, bogo4];
 
+const projectThumbnails = {
+    'Dismantling Transformers': dismantleTransformerThumb,
+    'Breeding Neural Networks': evolutionaryFusionThumb,
+    'Semantics Compressor': eagleThumb,
+};
+
+const projectPreviewMedia = {
+    'Project Land Shark': {
+        type: 'video',
+        title: 'Project Land Shark Preview',
+        src: landSharkPreviewVideo,
+    },
+};
+
 const Projects = () => {
-    const [activeFilter, setActiveFilter] = useState('All');
     const [showModal, setShowModal] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [modalContent, setModalContent] = useState('');
     const [modalTitle, setModalTitle] = useState('');
-    const [modalType, setModalType] = useState('html'); // 'html' or 'slideshow'
+    const [modalType, setModalType] = useState('html'); // 'html' | 'slideshow' | 'video'
+    const [modalMediaSrc, setModalMediaSrc] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     const [currentSlide, setCurrentSlide] = useState(0);
     const [copyFeedback, setCopyFeedback] = useState(null); // project id or null
 
-    const filters = ['All', 'Python', 'C', 'AI', 'Embedded/Robotics'];
-
-    const filteredProjects = useMemo(() => {
-        if (activeFilter === 'All') return projects;
-
-        return projects.filter(project => {
-            const lowerFilter = activeFilter.toLowerCase();
-            return project.tags.some(tag => {
-                const lowerTag = tag.toLowerCase();
-                if (lowerFilter === 'ai') return ['ai', 'machine learning', 'deep learning', 'computer vision', 'transformers', 'ocr', 'llm'].includes(lowerTag);
-                if (lowerFilter === 'embedded/robotics') return ['embedded systems', 'iot', 'hardware', 'robotics', 'control systems', 'slam'].includes(lowerTag);
-                if (lowerFilter === 'c') return ['c', 'c++'].includes(lowerTag);
-                return lowerTag.includes(lowerFilter);
-            });
-        });
-    }, [activeFilter]);
+    const topProjects = projects.slice(0, 6);
+    const moreProjects = projects.slice(6);
 
     // Deep linking logic
     useEffect(() => {
@@ -76,6 +80,14 @@ const Projects = () => {
         if (updateUrl) setSearchParams({ docs: 'bogo-beauty' });
     };
 
+    const openVideoModal = (title, mediaSrc) => {
+        setModalTitle(title);
+        setModalType('video');
+        setModalMediaSrc(mediaSrc);
+        setIsClosing(false);
+        setShowModal(true);
+    };
+
     const closeModal = () => {
         setIsClosing(true);
         setTimeout(() => {
@@ -101,37 +113,19 @@ const Projects = () => {
             {/* Section Header */}
             <div className="text-center mb-12">
                 <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                    <span className="text-gray-500">&lt;</span>
-                    Projects
-                    <span className="text-gray-500">/&gt;</span>
+                    <span style={{ fontFamily: "'Playfair Display', serif" }}>
+                        Projects
+                    </span>
                 </h2>
-                <p className="text-gray-400 max-w-2xl mx-auto">
-                    <span className="text-cyber-cyan">//</span> A showcase of my development work and experiments
-                </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
-                {filters.map((tag) => (
-                    <button
-                        key={tag}
-                        onClick={() => setActiveFilter(tag)}
-                        className={`
-              px-4 py-2 text-xs font-medium uppercase tracking-wider
-              border rounded transition-all duration-300
-              ${activeFilter === tag
-                                ? 'bg-cyber-cyan/20 border-cyber-cyan text-cyber-cyan shadow-glow'
-                                : 'bg-transparent border-gray-600 text-gray-400 hover:border-cyber-cyan/50 hover:text-white'
-                            }
-            `}
-                    >
-                        {tag}
-                    </button>
-                ))}
+            <div className="text-left mb-4">
+                <h3 className="text-sm uppercase tracking-wider text-gray-500">Pinned</h3>
             </div>
 
             {/* Projects Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project, index) => (
+                {topProjects.map((project, index) => (
                     <ProjectCard
                         key={project.id}
                         project={project}
@@ -155,23 +149,74 @@ const Projects = () => {
                                         : null
                         }
                         copyFeedback={copyFeedback === project.id}
+                        previewImage={projectThumbnails[project.title] || null}
+                        previewMedia={projectPreviewMedia[project.title] || null}
+                        onPreviewOpen={
+                            projectPreviewMedia[project.title]?.type === 'video'
+                                ? () =>
+                                    openVideoModal(
+                                        projectPreviewMedia[project.title].title,
+                                        projectPreviewMedia[project.title].src
+                                    )
+                                : null
+                        }
                     />
                 ))}
             </div>
 
-            {/* Empty state */}
-            {filteredProjects.length === 0 && (
-                <div className="text-center py-20">
-                    <p className="text-gray-500 text-lg">
-                        <span className="text-cyber-cyan">{'>'}</span> No projects found for "{activeFilter}"
-                    </p>
-                </div>
+            {moreProjects.length > 0 && (
+                <details className="mt-8 bg-glass-dark border border-glass-border rounded-lg p-4">
+                    <summary className="cursor-pointer list-none flex items-center justify-between text-gray-300 hover:text-white transition-colors">
+                        <span className="text-sm uppercase tracking-wider">Other Projects</span>
+                        <span className="text-xs text-gray-500">+{moreProjects.length}</span>
+                    </summary>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+                        {moreProjects.map((project, index) => (
+                            <ProjectCard
+                                key={project.id}
+                                project={project}
+                                index={index}
+                                onTechnicalDocs={
+                                    project.title === 'OCR-lighting'
+                                        ? () => openHtmlModal('OCR-lighting Technical Docs', ocrAnalysisHtml, 'ocr-lighting')
+                                        : project.title === 'Pix2Depth'
+                                            ? () => openHtmlModal('Pix2Depth Technical Docs', pix2depthAnalysisHtml, 'pix2depth')
+                                            : project.title === 'Bogo Beauty'
+                                                ? () => openSlideshow('Bogo Beauty Slides')
+                                                : null
+                                }
+                                onCopyLink={
+                                    project.title === 'OCR-lighting'
+                                        ? () => handleCopyLink('ocr-lighting', project.id)
+                                        : project.title === 'Pix2Depth'
+                                            ? () => handleCopyLink('pix2depth', project.id)
+                                            : project.title === 'Bogo Beauty'
+                                                ? () => handleCopyLink('bogo-beauty', project.id)
+                                                : null
+                                }
+                                copyFeedback={copyFeedback === project.id}
+                                previewImage={projectThumbnails[project.title] || null}
+                                previewMedia={projectPreviewMedia[project.title] || null}
+                                onPreviewOpen={
+                                    projectPreviewMedia[project.title]?.type === 'video'
+                                        ? () =>
+                                            openVideoModal(
+                                                projectPreviewMedia[project.title].title,
+                                                projectPreviewMedia[project.title].src
+                                            )
+                                        : null
+                                }
+                            />
+                        ))}
+                    </div>
+                </details>
             )}
 
             {/* Project count */}
             <div className="text-center mt-10">
                 <p className="text-sm text-gray-500">
-                    Showing <span className="text-cyber-cyan">{filteredProjects.length}</span> of{' '}
+                    Showing <span className="text-cyber-cyan">{topProjects.length}</span> of{' '}
                     <span className="text-cyber-green">{projects.length}</span> projects
                 </p>
             </div>
@@ -221,6 +266,15 @@ const Projects = () => {
                                     {/* Subtle overlay for premium feel */}
                                     <div className="absolute inset-0 pointer-events-none border-inset border-8 border-gray-900/5 transition-opacity group-hover:opacity-0"></div>
                                 </div>
+                            ) : modalType === 'video' ? (
+                                <div className="flex-grow bg-black flex items-center justify-center p-4">
+                                    <video
+                                        src={modalMediaSrc}
+                                        controls
+                                        playsInline
+                                        className="w-full h-auto max-h-full rounded-md border border-white/10"
+                                    />
+                                </div>
                             ) : (
                                 <div className="flex-grow overflow-y-auto bg-black/40 scroll-smooth">
                                     <div className="w-full space-y-0">
@@ -248,8 +302,18 @@ const Projects = () => {
     );
 };
 
-const ProjectCard = ({ project, index, onTechnicalDocs, onCopyLink, copyFeedback }) => {
+const ProjectCard = ({
+    project,
+    index,
+    onTechnicalDocs,
+    onCopyLink,
+    copyFeedback,
+    previewImage,
+    previewMedia,
+    onPreviewOpen,
+}) => {
     const [isHovered, setIsHovered] = useState(false);
+    const previewHref = project.link || project.github || null;
 
     return (
         <GlassSegment
@@ -258,6 +322,90 @@ const ProjectCard = ({ project, index, onTechnicalDocs, onCopyLink, copyFeedback
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
+            <div className="mb-4">
+                {onPreviewOpen ? (
+                    <button
+                        type="button"
+                        onClick={onPreviewOpen}
+                        className="block w-full text-left"
+                    >
+                        <div className="relative aspect-video rounded-lg overflow-hidden border border-glass-border bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
+                            {previewMedia?.type === 'video' ? (
+                                <video
+                                    src={previewMedia.src}
+                                    muted
+                                    loop
+                                    autoPlay
+                                    playsInline
+                                    preload="metadata"
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+                            ) : previewImage ? (
+                                <img
+                                    src={previewImage}
+                                    alt={`${project.title} thumbnail`}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.45),transparent_40%)]" />
+                            )}
+                            {!previewImage && (
+                                <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/80 to-transparent">
+                                    <p className="text-xs uppercase tracking-wider text-gray-200">Preview</p>
+                                </div>
+                            )}
+                        </div>
+                    </button>
+                ) : previewHref ? (
+                    <a
+                        href={previewHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                    >
+                        <div className="relative aspect-video rounded-lg overflow-hidden border border-glass-border bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
+                            {previewImage ? (
+                                <img
+                                    src={previewImage}
+                                    alt={`${project.title} thumbnail`}
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                />
+                            ) : (
+                                <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.45),transparent_40%)]" />
+                            )}
+                            {!previewImage && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-full bg-black/55 border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            )}
+                            {!previewImage && (
+                                <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/80 to-transparent">
+                                    <p className="text-xs uppercase tracking-wider text-gray-200">Preview</p>
+                                </div>
+                            )}
+                        </div>
+                    </a>
+                ) : (
+                    <div className="relative aspect-video rounded-lg overflow-hidden border border-glass-border bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
+                        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.45),transparent_40%)]" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-full bg-black/55 border border-white/30 flex items-center justify-center">
+                                <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2 bg-gradient-to-t from-black/80 to-transparent">
+                            <p className="text-xs uppercase tracking-wider text-gray-200">Placeholder Preview</p>
+                        </div>
+                    </div>
+                )}
+            </div>
+
             <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyber-cyan transition-colors">
                 {project.title}
             </h3>
@@ -288,7 +436,7 @@ const ProjectCard = ({ project, index, onTechnicalDocs, onCopyLink, copyFeedback
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
-                        Technical Docs
+                        {project.title === 'Dismantling Transformers' ? 'See Website' : 'Technical Docs'}
                     </a>
                 )}
                 {project.github && (

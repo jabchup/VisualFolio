@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styles from './EnhancementPath.module.css';
 import pathsConfig from '../../config/paths.json';
-import alexiPFP from '../RoboticsPath/assets/AlexiPFP.jpg';
-import seeingSoundImg from '../RoboticsPath/assets/projects/seeingSound.png';
-import seeingSoundResults from '../RoboticsPath/assets/projects/seeingSound2_results.png';
-import uniViz1 from '../RoboticsPath/assets/projects/UniViz1.png';
-import uniViz2 from '../RoboticsPath/assets/projects/UniViz2.png';
-import uuvDenoiseImg from '../RoboticsPath/assets/projects/UVV_denoiser.png';
-import uuvResultImg from '../RoboticsPath/assets/projects/denoisedImage.png';
+import alexiPFP from './assets/AlexiPFP.jpg';
+import seeingSoundImg from './assets/projects/seeingSound.png';
+import seeingSoundResults from './assets/projects/seeingSound2_results.png';
+import uniViz1 from './assets/projects/UniViz1.png';
+import uniViz2 from './assets/projects/UniViz2.png';
+import uuvDenoiseImg from './assets/projects/UVV_denoiser.png';
+import uuvResultImg from './assets/projects/denoisedImage.png';
 
 
 const EnhancementPath = () => {
