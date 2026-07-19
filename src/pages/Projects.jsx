@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { useSearchParams } from 'react-router-dom';
 import GlassSegment from '../components/GlassSegment';
 import { projects } from '../data/projects';
+import { trackButtonClick, trackClarityEvent } from '../utils/analytics';
 
 // Import the technical analysis HTML content
 import ocrAnalysisHtml from '../assets/Technical Analysis_OCR-lighting.html?raw';
@@ -63,6 +64,11 @@ const Projects = () => {
     }, [searchParams]);
 
     const openHtmlModal = (title, content, slug, updateUrl = true) => {
+        trackClarityEvent('project_modal_open', {
+            project_panel: slug,
+            panel_type: 'technical_docs',
+            page_path: `${window.location.pathname}${window.location.hash}`,
+        });
         setModalTitle(title);
         setModalContent(content);
         setModalType('html');
@@ -72,6 +78,11 @@ const Projects = () => {
     };
 
     const openSlideshow = (title, updateUrl = true) => {
+        trackClarityEvent('project_modal_open', {
+            project_panel: 'bogo_beauty',
+            panel_type: 'slideshow',
+            page_path: `${window.location.pathname}${window.location.hash}`,
+        });
         setModalTitle(title);
         setModalType('slideshow');
         setCurrentSlide(0);
@@ -81,6 +92,11 @@ const Projects = () => {
     };
 
     const openVideoModal = (title, mediaSrc) => {
+        trackClarityEvent('project_modal_open', {
+            project_panel: title,
+            panel_type: 'video',
+            page_path: `${window.location.pathname}${window.location.hash}`,
+        });
         setModalTitle(title);
         setModalType('video');
         setModalMediaSrc(mediaSrc);
@@ -89,6 +105,11 @@ const Projects = () => {
     };
 
     const closeModal = () => {
+        trackClarityEvent('project_modal_close', {
+            project_panel: modalTitle,
+            panel_type: modalType,
+            page_path: `${window.location.pathname}${window.location.hash}`,
+        });
         setIsClosing(true);
         setTimeout(() => {
             setShowModal(false);
@@ -166,7 +187,10 @@ const Projects = () => {
 
             {moreProjects.length > 0 && (
                 <details className="mt-8 bg-glass-dark border border-glass-border rounded-lg p-4">
-                    <summary className="cursor-pointer list-none flex items-center justify-between text-gray-300 hover:text-white transition-colors">
+                    <summary
+                        onClick={() => trackButtonClick('toggle_other_projects', 'projects_section')}
+                        className="cursor-pointer list-none flex items-center justify-between text-gray-300 hover:text-white transition-colors"
+                    >
                         <span className="text-sm uppercase tracking-wider">Other Projects</span>
                         <span className="text-xs text-gray-500">+{moreProjects.length}</span>
                     </summary>
@@ -245,7 +269,13 @@ const Projects = () => {
                                 </h3>
                             </div>
                             <button
-                                onClick={closeModal}
+                                onClick={() => {
+                                    trackButtonClick('close_project_modal', 'project_modal', {
+                                        modal_title: modalTitle,
+                                        modal_type: modalType,
+                                    });
+                                    closeModal();
+                                }}
                                 className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-all border border-transparent hover:border-white/10"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -314,6 +344,17 @@ const ProjectCard = ({
 }) => {
     const [isHovered, setIsHovered] = useState(false);
     const previewHref = project.link || project.github || null;
+    const projectName = project.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_|_$/g, '');
+    const trackProjectClick = (action, additionalParameters = {}) => {
+        trackButtonClick(`${projectName}_${action}`, 'projects_section', {
+            action,
+            project_title: project.title,
+            ...additionalParameters,
+        });
+    };
 
     return (
         <GlassSegment
@@ -326,7 +367,10 @@ const ProjectCard = ({
                 {onPreviewOpen ? (
                     <button
                         type="button"
-                        onClick={onPreviewOpen}
+                        onClick={() => {
+                            trackProjectClick('open_preview');
+                            onPreviewOpen();
+                        }}
                         className="block w-full text-left"
                     >
                         <div className="relative aspect-video rounded-lg overflow-hidden border border-glass-border bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
@@ -361,6 +405,9 @@ const ProjectCard = ({
                         href={previewHref}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackProjectClick('open_preview_link', {
+                            destination: project.link ? 'project_website' : 'github',
+                        })}
                         className="block"
                     >
                         <div className="relative aspect-video rounded-lg overflow-hidden border border-glass-border bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
@@ -431,6 +478,9 @@ const ProjectCard = ({
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackProjectClick('open_project', {
+                            destination: 'project_website',
+                        })}
                         className="flex items-center gap-2 text-sm text-cyber-cyan hover:text-white transition-colors"
                     >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -444,6 +494,9 @@ const ProjectCard = ({
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => trackProjectClick('open_source', {
+                            destination: 'github',
+                        })}
                         className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
                     >
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -455,7 +508,10 @@ const ProjectCard = ({
                 {onTechnicalDocs && (
                     <div className="flex items-center gap-2">
                         <button
-                            onClick={onTechnicalDocs}
+                            onClick={() => {
+                                trackProjectClick('open_technical_docs');
+                                onTechnicalDocs();
+                            }}
                             className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -466,6 +522,7 @@ const ProjectCard = ({
                         {onCopyLink && (
                             <button
                                 onClick={(e) => {
+                                    trackProjectClick('copy_direct_link');
                                     e.stopPropagation();
                                     onCopyLink();
                                 }}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { trackButtonClick } from "../utils/analytics";
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -57,7 +58,13 @@ const Header = () => {
                     <div className="flex-shrink-0">
                         <a
                             href="#about"
-                            onClick={(e) => { e.preventDefault(); scrollToSection('about'); }}
+                            onClick={(e) => {
+                                trackButtonClick('portfolio_logo', 'header_navigation', {
+                                    button_text: "Alexi's Portfolio",
+                                });
+                                e.preventDefault();
+                                scrollToSection('about');
+                            }}
                             className="flex items-center gap-2 group"
                         >
                             <span className="text-cyber-cyan text-xl font-bold tracking-wider group-hover:animate-pulse-glow">
@@ -77,7 +84,12 @@ const Header = () => {
                         {navLinks.map((link) => (
                             <button
                                 key={link.id}
-                                onClick={() => scrollToSection(link.id)}
+                                onClick={() => {
+                                    trackButtonClick(link.id, 'header_navigation', {
+                                        button_text: link.label,
+                                    });
+                                    scrollToSection(link.id);
+                                }}
                                 className={`
                   px-4 py-2 text-sm font-medium tracking-wider uppercase
                   transition-all duration-300 relative

@@ -1,3 +1,5 @@
+import { trackButtonClick } from '../utils/analytics';
+
 const researchPapers = [
     {
         id: 1,
@@ -31,6 +33,12 @@ const Research = () => {
                             href={paper.link}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={() =>
+                                trackButtonClick('robust_audio_visual_speech_recognition_paper', 'research_section', {
+                                    button_text: 'Open Paper',
+                                    publication_title: paper.title,
+                                })
+                            }
                             className="inline-flex items-center gap-2 text-sm text-cyber-cyan hover:text-white transition-colors"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
