@@ -19,6 +19,7 @@ import evolutionaryFusionThumb from '../assets/thumbnails/evolutionary-model-fus
 import eagleThumb from '../assets/thumbnails/Eagle.png';
 import landSharkPreviewVideo from '../assets/thumbnails/LandShark.mp4';
 import turtlebot3PreviewVideo from '../assets/thumbnails/turtlebot3-preview.webm';
+import rosInspectionPreviewVideo from '../assets/thumbnails/ros-inspection-preview.webm';
 
 const bogoBeautySlides = [bogo1, bogo2, bogo3, bogo4];
 
@@ -38,6 +39,11 @@ const projectPreviewMedia = {
         type: 'video',
         title: 'TurtleBot3 Maze Navigation Preview',
         src: turtlebot3PreviewVideo,
+    },
+    'ROS Inspection Robot System': {
+        type: 'video',
+        title: 'ROS Inspection Robot Preview',
+        src: rosInspectionPreviewVideo,
     },
 };
 
