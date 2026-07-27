@@ -19,7 +19,9 @@ import evolutionaryFusionThumb from '../assets/thumbnails/evolutionary-model-fus
 import eagleThumb from '../assets/thumbnails/Eagle.png';
 import landSharkPreviewVideo from '../assets/thumbnails/LandShark.mp4';
 import turtlebot3PreviewVideo from '../assets/thumbnails/turtlebot3-preview.webm';
-import rosInspectionPreviewVideo from '../assets/thumbnails/ros-inspection-preview.webm';
+import rosInspectionPreviewVideo from '../assets/thumbnails/ros-inspection-preview.mp4';
+import catBehaviourPreviewVideo from '../assets/thumbnails/cat-behaviour-preview.mp4';
+import tremorDetectionThumb from '../assets/thumbnails/tremor-detection-thumb.png';
 
 const bogoBeautySlides = [bogo1, bogo2, bogo3, bogo4];
 
@@ -27,6 +29,7 @@ const projectThumbnails = {
     'Dismantling Transformers': dismantleTransformerThumb,
     'Breeding Neural Networks': evolutionaryFusionThumb,
     'Semantics Compressor': eagleThumb,
+    'Edge AI Tremor Detection on Raspberry Pi Pico W': tremorDetectionThumb,
 };
 
 const projectPreviewMedia = {
@@ -44,6 +47,11 @@ const projectPreviewMedia = {
         type: 'video',
         title: 'ROS Inspection Robot Preview',
         src: rosInspectionPreviewVideo,
+    },
+    'Edge Impulse Cat Behaviour Classifier with LoRaWAN': {
+        type: 'video',
+        title: 'Cat Behaviour Classifier Preview',
+        src: catBehaviourPreviewVideo,
     },
 };
 
