@@ -8,18 +8,14 @@ import RoboticsPath from './pages/RoboticsPath/RoboticsPath'
 import EnhancementPath from './pages/EnhancementPath/EnhancementPath'
 import AgentPath from './pages/AgentPath/AgentPath'
 import systems1 from './assets/polaroids/systems1.jpg'
-import systems2 from './assets/polaroids/systems2.jpg'
-import systems3 from './assets/polaroids/systems3.jpg'
 import system4 from './assets/polaroids/system4.jpg'
 import system5 from './assets/polaroids/system5.jpg'
 
 const PolaroidBand = () => {
     const cards = [
-        { id: 1, label: 'prototype', src: systems1 },
-        { id: 2, label: 'testing', src: systems2 },
-        { id: 3, label: 'iteration', src: systems3 },
-        { id: 4, label: 'deployment', src: system4 },
-        { id: 5, label: 'learning', src: system5 },
+        { id: 1, label: 'hardware', src: system4 },
+        { id: 2, label: 'telemetry', src: system5 },
+        { id: 3, label: 'prototype', src: systems1 },
     ];
 
     return (
@@ -31,7 +27,7 @@ const PolaroidBand = () => {
                     className="text-gray-300 text-2xl sm:text-3xl tracking-wide mb-6"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                    learning to build, building to learn
+                    version one is better than version none
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
@@ -60,7 +56,7 @@ const PolaroidBand = () => {
                     className="text-gray-300 text-2xl sm:text-3xl tracking-wide mt-10"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
-                    applied research and systems engineering
+                    applied learning and hands-on research
                 </p>
             </div>
         </section>

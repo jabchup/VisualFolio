@@ -60,7 +60,7 @@ const Header = () => {
                             href="#about"
                             onClick={(e) => {
                                 trackButtonClick('portfolio_logo', 'header_navigation', {
-                                    button_text: "Alexi's Portfolio",
+                                    button_text: "Muas's Portfolio",
                                 });
                                 e.preventDefault();
                                 scrollToSection('about');
@@ -71,7 +71,7 @@ const Header = () => {
                                 [
                             </span>
                             <span className="text-white font-semibold text-lg tracking-wide">
-                                Alexi&apos;s Portfolio
+                                Muas&apos;s Portfolio
                             </span>
                             <span className="text-cyber-cyan text-xl font-bold tracking-wider group-hover:animate-pulse-glow">
                                 ]

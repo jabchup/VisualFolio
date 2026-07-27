@@ -6,85 +6,59 @@ const Career = () => {
     const experienceData = [
         {
             id: 1,
-            role: 'AI Research Engineer (Intern/Team Lead)',
-            company: 'Agency for Science, Technology and Research (A*STAR)',
-            period: 'Dec 2025 - Ongoing',
+            role: 'UAV Software',
+            company: 'RobotX @ SIT',
+            period: 'March 2026 - Present',
             location: 'Singapore',
-            description: 'Leading a team to collaborate with researchers from A*STAR on humanoid actuator design.',
+            description: 'Developing autonomous flight control and onboard vision software for a UAV platform using pymavlink and Jetson Orin Nano.',
             highlights: [
-                'Developing Agents for Finite Element Analysis for humanoid actuator design using Langchain and the ReAct Agent Framework',
-                'Implementing PINNs to model actuator dynamics, reducing computational overhead by 40% while maintaining accuracy compared to traditional solvers',
-                'Integrated human-in-the-loop interfaces that allow users to steer agents for optimizing actuator torque-to-weight ratios through real-time feedback',
+                'Built an autonomous hover-and-observe mission system using pymavlink with 6-mode RC arbitration, physical E-STOP, and controlled LAND on exit',
+                'Integrated Jetson Orin Nano with Pixhawk 6X over USB serial for onboard compute and real-time telemetry',
+                'Developed a vision pipeline with bounding-box normalization, drift tracking, and structured UDP map payloads to a companion vessel',
+                'Implemented FCU parameter validation, geofence checks, and failsafe enforcement informed by a real flight incident',
             ],
-            technologies: ['React', 'Langchain', 'ReAct Framework', 'PINNs', 'Agentic AI'],
+            technologies: ['pymavlink', 'ArduPilot', 'Jetson Orin Nano', 'Pixhawk 6X', 'OpenCV', 'UDP Networking'],
         },
         {
             id: 2,
-            role: 'Lead Student Engineer',
-            company: 'AIRBORNE Lab @ SIT',
-            period: 'Nov 2024 - Ongoing',
+            role: 'Robotics Process Automation (RPA) Developer',
+            company: 'KLP LLP Pte Ltd',
+            period: 'September 2023 - February 2024',
             location: 'Singapore',
-            description: 'Leading drone development in collaboration with ASAIL and SIT-DSO research lab.',
+            description: 'Built and maintained two RPA workflows for audit processes, both still in active use across the firm.',
             highlights: [
-                'Co-lead a team of 62 students developing unmanned aerial flight algorithms',
-                'Developing the first hybrid powered 200kg drone in Singapore',
-                'Working in an agile environment with research engineers',
+                'Developed, debugged, and tested RPA solutions using UiPath and Excel VBA, reducing repetitive audit tasks by 50%',
+                'Authored process documentation to ensure maintainability across the team',
+                'Collaborated with auditors to scope requirements and design automation workflows for new and existing audit processes',
+                'Analyzed and mapped audit procedures into structured automatic logic, adapting workflows to varying project contexts',
             ],
-            technologies: ['Flight Algorithms', 'Agile', 'Drone Tech'],
+            technologies: ['UiPath', 'Excel VBA', 'C#', 'M-Language'],
         },
         {
             id: 3,
-            role: 'Research Assistant (Multimodal Speech Processing)',
-            company: 'SIT x NVIDIA AI Center',
-            period: 'Nov 2024 - Aug 2025',
+            role: 'Retail Associate',
+            company: 'Challenger',
+            period: 'October 2022 - January 2024',
             location: 'Singapore',
-            description: 'Researching multimodal speech processing optimization and real-time decision systems.',
+            description: 'Front-of-house sales and technical advisory for consumer electronics.',
             highlights: [
-                'Optimized and quantized NISQA to process 20-second clips in <0.03s with 97% accuracy, improving latency by 43%',
-                'Validated real-time decision-making systems performance',
-                'Work successfully accepted and presented at APSIPA 2025 conference',
+                'Advised customers on consumer electronics, translating technical specifications into accessible recommendations',
+                'Resolved customer queries and delivered tailored product solutions to drive satisfaction and repeat business',
             ],
-            technologies: ['Speech Processing', 'Optimization', 'Real-time Systems'],
+            technologies: ['Customer Advisory', 'Product Knowledge', 'Sales Support'],
         },
         {
             id: 4,
-            role: 'AI Research Intern (Generative AI)',
-            company: 'CYNAPSE.AI',
-            period: 'May 2024 - Oct 2024',
+            role: 'Warehouse Assistant',
+            company: 'Ikano',
+            period: 'July 2022, December 2023',
             location: 'Singapore',
-            description: 'Worked on integrating Spatio-Temporal Models and developing production-ready inference services.',
+            description: 'Coordinated order fulfilment and dispatch operations alongside full-time and part-time warehouse staff.',
             highlights: [
-                'Integrated Spatio-Temporal Models for cyNeuron multimodal scene search (showcased at NVIDIA GTC 2025)',
-                'Developed production inference service improving latency by over 400%',
-                'Built encoder comparison dashboards for benchmarking Multimodal LLMs and Retrieval pipelines',
+                'Processed and staged online orders for timely and safe handoff to dispatch drivers',
+                'Identified workflow improvements to accelerate order-to-dispatch turnaround',
             ],
-            technologies: ['Docker', 'TensorRT', 'Triton Inference Server', 'Multimodal LLMs'],
-        },
-        {
-            id: 5,
-            role: 'AI Software Engineer Intern (Vision AI)',
-            company: 'CYNAPSE.AI',
-            period: 'Aug 2021 - June 2022',
-            location: 'Singapore',
-            description: 'Focus on synthetic data generation and computer vision model development.',
-            highlights: [
-                'Implemented 3D Simulations for Synthetic Human Action Data Generation (95% accuracy on 60% synthetic data)',
-                'Developed detectors, classifiers and action recognition models for video analytics',
-            ],
-            technologies: ['OpenCV', 'Blender', 'Unity', 'TensorFlow', 'PyTorch', 'Darknet'],
-        },
-        {
-            id: 6,
-            role: 'Robotics & Automation Engineer Intern',
-            company: 'Univac Precision Engineering Pte Ltd',
-            period: 'Mar 2021 - Aug 2021',
-            location: 'Singapore',
-            description: 'Spearheaded IoT development and autonomous robot deployment.',
-            highlights: [
-                'Developed efficient IoT data transferring system using Raspberry Pi and RESTful APIs',
-                'Programmed and launched Autonomous mobile robots for production lines',
-            ],
-            technologies: ['Python', 'Raspberry Pi', 'RESTful APIs', 'Robotics'],
+            technologies: ['Order Fulfilment', 'Logistics Coordination', 'Process Improvement'],
         },
     ];
 
@@ -150,7 +124,7 @@ const Career = () => {
                         </p>
                         <div className="flex items-center gap-3 mt-2 text-sm">
                             <span className="text-gray-500">{selectedItem.period}</span>
-                            <span className="text-gray-700">•</span>
+                            <span className="text-gray-700">ï¿½</span>
                             <span className="text-gray-500">{selectedItem.location}</span>
                         </div>
                     </div>

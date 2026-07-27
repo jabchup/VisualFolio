@@ -1,84 +1,65 @@
 export const projects = [
     {
-        id: 5,
-        title: "Project Land Shark",
-        description: "Autonomous 2D SLAM robot engineered on a resource-constrained Raspberry Pi Pico W. Optimized LiDAR-based point cloud processing and localization algorithms in C for real-time mapping within 264KB SRAM.",
-        tags: ["C", "Robotics", "Embedded Systems", "SLAM", "Control Systems"],
-        github: "https://github.com/WolfverusWasTaken/LandShark-LiDARModule",
-        link: null,
-        featured: true
-    },
-    {
         id: 1,
-        title: "Dismantling Transformers",
-        description: "A website that visualizes Transformers and how they operate at the code level. It also explains the fundamentals of the logic and how it works.",
-        tags: ["React", "Visualization", "Education", "AI", "Transformers", "Web"],
-        github: null,
-        link: "https://dismantling-transformers.vercel.app/",
-        featured: true
-    },
-    {
-        id: 9,
-        title: "Pix2Depth",
-        description: "Precision 3D spatial inference pipeline fusing YOLOv11 and ZED Stereographic vision for real-time target mapping. Engineered a custom room-space calibration engine achieving millimeter-level XYZ precision for Multi Object Drone tracking.",
-        tags: ["PyTorch", "Computer Vision", "Spatial Intelligence", "Multi Object Tracking"],
-        github: null,
-        link: null,
-        featured: true,
-        technicalAnalysis: "/docs/Technical_Analysis_Pix2Depth.html"
-    },
-    {
-        id: 8,
-        title: "Semantics Compressor",
-        description: "Extreme semantic compression for vision. An agglomerative ternary backbone achieving 1.6x hardware acceleration via custom Triton kernels. Aggregates DINOv2 and SigLIP features for high-speed, low-bitweight intelligence.",
-        tags: ["PyTorch", "Python", "AI", "Computer Vision", "Distillation"],
-        github: "https://github.com/WolfverusWasTaken/semantics-compressor",
-        link: null,
-        featured: true
-    },
-    {
-        id: 3,
-        title: "Breeding Neural Networks",
-        description: "Evolutionary model fusion framework that breeds neural networks through genetic algorithms. Explores novel weight merging strategies to create offspring models that outperform their parents.",
-        tags: ["Python", "PyTorch", "AI", "Evolutionary Algorithms", "Model Merging"],
-        github: "https://github.com/WolfverusWasTaken/Evolutionary-Model-Fusion",
-        link: null,
-        featured: true
-    },
-    {
-        id: 10,
-        title: "Seeing Sound II",
-        description: "Cross-modal generative AI system that translates audio into images using CLAP-conditioned Stable Diffusion and conditional GAN pipelines, with dataset preparation and semantic alignment workflows.",
-        tags: ["PyTorch", "Stable Diffusion", "CLAP", "GAN", "Multimodal AI"],
-        github: "https://github.com/RajVarunn/Seeing-Sound-II",
-        link: null,
-        featured: true
-    },
-    {
-        id: 4,
-        title: "OCR-lighting",
-        description: "Optimized OCR pipeline integrating CRAFT and PP-OCRv3. Achieved 77% reduction in processing time via ONNX and FP16. Semi-finalist at DSTA Brainhack 2025 (Accuracy: 0.94, Speed: 0.90).",
-        tags: ["Python", "PyTorch", "OCR", "ONNX", "Docker", "Machine Learning"],
-        github: null,
-        link: null,
-        featured: true
-    },
-    {
-        id: 6,
-        title: "Bogo Beauty",
-        description: "Multi-Attribute Facial Feature Classifier using CLIP (92% accuracy) and Google Mediapipe. Creates a robust beauty product recommendation system. Ranked 2nd at Micro Design Summer Challenge (Korea).",
-        tags: ["Python", "PyTorch", "Transformers", "Machine Learning", "Computer Vision"],
-        github: null,
+        title: "UAV Flight Control & Vision Pipeline for Maritime Robotics",
+        description: "Developing real-time computer vision and autonomous flight systems for a USV-UAV maritime robotics platform competing in RobotX.",
+        tags: ["pymavlink", "ArduPilot", "Jetson Orin Nano", "Pixhawk 6X", "OpenCV", "UDP Networking", "Computer Vision"],
+        github: "https://github.com/OPTIPRIME-SIT?view_as=public",
         link: null,
         featured: true
     },
     {
         id: 2,
-        title: "Multi Agent World Orchestrator Engine",
-        description: "Heterogeneous tri-database architecture (SQLite, NetworkX, LanceDB) for consistent world state and long-term agent memory. Features polymorphic state engine with custom LLM-generated schemas, achieving sub-800ms turn response times on local hardware.",
-        tags: ["Python", "FastAPI", "React", "LanceDB", "GraphDB", "SQL", "AI", "LLM"],
-        github: "https://github.com/WolfverusWasTaken/Bobscript/tree/main",
-        link: "https://wolfveruswastaken.github.io/Bobscript/",
+        title: "TurtleBot3 Autonomous Maze Navigation",
+        description: "Built a ROS-based autonomous navigation system for TurtleBot3, implementing SLAM mapping, AMCL localisation, and waypoint automation in a custom Gazebo maze environment.",
+        tags: ["ROS", "Gazebo", "RViz", "SLAM", "Python", "AMCL", "Navigation Stack"],
+        github: "https://github.com/jabchup/turtlebot3-maze-navigation.git",
+        link: null,
+        featured: true
+    },
+    {
+        id: 3,
+        title: "ROS Inspection Robot System",
+        description: "Built a multi-node ROS inspection robot demonstrating pub/sub topics, custom services, and tf2 transforms through a unified launch system using rospy.",
+        tags: ["ROS", "rospy", "tf2", "Python", "Catkin"],
+        github: "https://github.com/jabchup/ros-inspection-robot.git",
+        link: null,
+        featured: true
+    },
+    {
+        id: 4,
+        title: "Aerial Image Classification — Dockerised FastAPI Inference System",
+        description: "Trained and evaluated six architectures — from VGG16 and DenseNet to Vision Transformers — for aerial image classification across four land-use classes, achieving 97.50% accuracy with a fine-tuned EfficientNet-B3 and deployed inference via a Dockerised FastAPI endpoint.",
+        tags: ["PyTorch", "EfficientNet", "Swin Transformer", "Transfer Learning", "Computer Vision", "FastAPI", "Docker", "Python"],
+        github: "https://github.com/h4nzolo/ML-Assignment-Grp29",
+        link: null,
+        featured: true
+    },
+    {
+        id: 5,
+        title: "Multi-Protocol IoT Air Quality Monitoring System",
+        description: "Built a multi-protocol IoT air quality monitoring system with triple-layer redundancy — WiFi/MQTT, LoRa mesh, and BLE — for reliable smoke detection across nodes.",
+        tags: ["Arduino", "ESP32", "LoRa", "MQTT", "BLE", "IoT", "C++"],
+        github: "https://github.com/csc2106-team16/meshstacklorable",
+        link: null,
+        featured: true
+    },
+    {
+        id: 6,
+        title: "Edge AI Tremor Detection on Raspberry Pi Pico W",
+        description: "Developed a FreeRTOS-based IMU tremor detection system on Raspberry Pi Pico W, wrapping an Edge Impulse C++ classifier in a C-callable interface with WiFi/MQTT and LoRa failover.",
+        tags: ["C", "C++", "Edge Impulse", "TFLite", "FreeRTOS", "Raspberry Pi Pico W", "MQTT", "LoRa", "IMU"],
+        github: "https://github.com/jabchup/imu-tremor-detection",
+        link: null,
+        featured: true
+    },
+    {
+        id: 7,
+        title: "Edge Impulse Cat Behaviour Classifier with LoRaWAN",
+        description: "Built an IMU-based cat behaviour classifier using Edge Impulse on ESP32 with MPU6050, transmitting inference results (happy, distress, sick) over LoRaWAN to TTN with LED and buzzer alerts on downlink.",
+        tags: ["Edge Impulse", "ESP32", "MPU6050", "LoRaWAN", "Arduino", "TinyML", "C++"],
+        github: "https://github.com/jabchup/cat-behaviour-classifier",
+        link: null,
         featured: true
     }
 ];

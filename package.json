@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://yourusername.github.io/VisualFolio",
+  "homepage": "https://jabchup.github.io/VisualFolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
