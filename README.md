@@ -14,7 +14,7 @@ Opens at `http://localhost:5173/VisualFolio/`
 ## Deploying
 
 Push to `main` branch - GitHub Actions handles the rest. Site goes live at:
-[https://WolfverusWasTaken.github.io/VisualFol(https://jabchup.github.io/VisualFolio/)
+(https://jabchup.github.io/VisualFolio/)
 
 ## Stack
 
