@@ -18,6 +18,7 @@ import dismantleTransformerThumb from '../assets/thumbnails/dismantle-transforme
 import evolutionaryFusionThumb from '../assets/thumbnails/evolutionary-model-fusion.png';
 import eagleThumb from '../assets/thumbnails/Eagle.png';
 import landSharkPreviewVideo from '../assets/thumbnails/LandShark.mp4';
+import turtlebot3PreviewVideo from '../assets/thumbnails/turtlebot3-preview.webm';
 
 const bogoBeautySlides = [bogo1, bogo2, bogo3, bogo4];
 
@@ -32,6 +33,11 @@ const projectPreviewMedia = {
         type: 'video',
         title: 'Project Land Shark Preview',
         src: landSharkPreviewVideo,
+    },
+    'TurtleBot3 Autonomous Maze Navigation': {
+        type: 'video',
+        title: 'TurtleBot3 Maze Navigation Preview',
+        src: turtlebot3PreviewVideo,
     },
 };
 
